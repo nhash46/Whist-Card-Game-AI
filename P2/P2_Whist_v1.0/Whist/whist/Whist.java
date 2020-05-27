@@ -1,8 +1,5 @@
 // Whist.java
 
-import properties.CardGameProperties;
-import properties.OriginalProperties;
-
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 
@@ -149,8 +146,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
-            //selected = randomCard(hands[nextPlayer]);
+            selected = randomCard(hands[nextPlayer]);
         }
         // Lead with selected card
 	        trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -234,14 +230,11 @@ private Optional<Integer> playRound() {  // Returns winner, if any
     setStatusText("Game over. Winner is player: " + winner.get());
     refresh();
   }
-  
-  public static CardGameProperties properties;
-  
+
   public static void main(String[] args)
   {
-	  properties = new OriginalProperties();
-	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
-	  new Whist();
+	// System.out.println("Working Directory = " + System.getProperty("user.dir"));
+    new Whist();
   }
 
 }
