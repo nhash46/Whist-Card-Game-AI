@@ -172,7 +172,8 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = randomCard(hands[nextPlayer]);
+		        selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
+	            //selected = randomCard(hands[nextPlayer]);
 	        }
 	        // Follow with selected card
 		        trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
