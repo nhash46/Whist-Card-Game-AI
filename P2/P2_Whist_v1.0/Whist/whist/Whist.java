@@ -1,6 +1,7 @@
 // Whist.java
 
 import properties.cardgameproperties;
+import properties.OriginalProperties;
 
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
@@ -235,7 +236,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 
   public static void main(String[] args)
   {
-	CardGameProperties properties = new OriginalProperties();
+	cardgameproperties properties = new OriginalProperties();
 	
 	// System.out.println("Working Directory = " + System.getProperty("user.dir"));
     new Whist();
