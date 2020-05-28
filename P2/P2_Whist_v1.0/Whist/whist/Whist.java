@@ -149,7 +149,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
+            selected = properties.getPlayerStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
             //selected = randomCard(hands[nextPlayer]);
         }
         // Lead with selected card
@@ -172,7 +172,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
+		        selected = properties.getPlayerStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
 	            //selected = randomCard(hands[nextPlayer]);
 	        }
 	        // Follow with selected card

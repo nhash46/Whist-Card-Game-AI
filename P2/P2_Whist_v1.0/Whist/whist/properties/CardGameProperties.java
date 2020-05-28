@@ -21,7 +21,7 @@ public abstract class CardGameProperties {
 	}
 	
 	
-	public ICardSelectionStrategy[] getPlayeStrategies() {
+	public ICardSelectionStrategy[] getPlayerStrategies() {
 		return playerStrategies;
 	}
 }
