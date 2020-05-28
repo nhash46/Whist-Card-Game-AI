@@ -25,8 +25,13 @@ public class HumanSelectionStrategy implements ICardSelectionStrategy{
 		hand.setTouchEnabled(true);
 		
 		selected = null;
-		while(selected == null) {
-		}
+		while (null == selected) {
+			try {
+	            Thread.sleep(100);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		};
 		
 		return selected;
 	}
