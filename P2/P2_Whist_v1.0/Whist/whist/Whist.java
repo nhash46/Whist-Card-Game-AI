@@ -108,11 +108,13 @@ private void initRound() {
 			   hands[i].sort(Hand.SortType.SUITPRIORITY, true);
 		 }
 		 // Set up human player for interaction
+		/**
 		CardListener cardListener = new CardAdapter()  // Human Player plays card
 			    {
 			      public void leftDoubleClicked(Card card) { selected = card; hands[0].setTouchEnabled(false); }
 			    };
 		hands[0].addCardListener(cardListener);
+		*/
 		 // graphics
 	    RowLayout[] layouts = new RowLayout[nbPlayers];
 	    for (int i = 0; i < nbPlayers; i++) {
