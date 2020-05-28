@@ -143,13 +143,14 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 		trick = new Hand(deck);
     	selected = null;
         if (0 == nextPlayer) {  // Select lead depending on player type
-    		hands[0].setTouchEnabled(true);
+    		//hands[0].setTouchEnabled(true);
     		setStatus("Player 0 double-click on card to lead.");
-    		while (null == selected) delay(100);
+    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+    		//while (null == selected) delay(100);
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
+            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
             //selected = randomCard(hands[nextPlayer]);
         }
         // Lead with selected card
@@ -166,13 +167,14 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 			if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
 			selected = null;
 	        if (0 == nextPlayer) {
-	    		hands[0].setTouchEnabled(true);
+	    		//hands[0].setTouchEnabled(true);
 	    		setStatus("Player 0 double-click on card to follow.");
-	    		while (null == selected) delay(100);
+	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+	    		//while (null == selected) delay(100);
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = properties.getPlayeStrategies()[1].selectCard(hands[nextPlayer]);
+		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
 	            //selected = randomCard(hands[nextPlayer]);
 	        }
 	        // Follow with selected card

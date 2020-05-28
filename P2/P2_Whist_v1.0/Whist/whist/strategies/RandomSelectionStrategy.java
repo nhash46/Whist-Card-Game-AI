@@ -13,11 +13,11 @@ public class RandomSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	// return random Card from Hand
-	  public Card selectCard(Hand hand){
-		  Random random = ThreadLocalRandom.current();
-	      int x = random.nextInt(hand.getNumberOfCards());
-	      return hand.get(x);
-	  }
+	public Card selectCard(Hand hand){
+		Random random = ThreadLocalRandom.current();
+	    int x = random.nextInt(hand.getNumberOfCards());
+	    return hand.get(x);
+	}
 	  
 	  
 }
