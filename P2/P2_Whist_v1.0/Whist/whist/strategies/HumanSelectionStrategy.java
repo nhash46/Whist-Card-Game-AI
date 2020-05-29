@@ -1,6 +1,7 @@
 package strategies;
 
 import ch.aplu.jcardgame.*;
+import properties.CardGameProperties.Suit;
 
 public class HumanSelectionStrategy implements ICardSelectionStrategy{
 	
@@ -11,7 +12,8 @@ public class HumanSelectionStrategy implements ICardSelectionStrategy{
 		
 	}
 
-	public Card selectCard(Hand hand) {
+	// Return human selected card from hand
+	public Card selectCard(Hand hand, Suit lead, Suit trump){
 
 		//Set up human player to be able to select a card
 		CardListener cardListener = new CardAdapter()

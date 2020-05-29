@@ -1,6 +1,7 @@
 // Whist.java
 
 import properties.CardGameProperties;
+import properties.CardGameProperties.Suit;
 import properties.OriginalProperties;
 
 import ch.aplu.jcardgame.*;
@@ -13,11 +14,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("serial")
 public class Whist extends CardGame {
-	
-  public enum Suit
-  {
-    SPADES, HEARTS, DIAMONDS, CLUBS
-  }
 
   public enum Rank
   {
@@ -137,7 +133,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	Hand trick;
 	int winner;
 	Card winningCard;
-	Suit lead;
+	Suit lead = null;
 	int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
 	for (int i = 0; i < nbStartCards; i++) {
 		trick = new Hand(deck);
@@ -145,12 +141,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
         if (0 == nextPlayer) {  // Select lead depending on player type
     		//hands[0].setTouchEnabled(true);
     		setStatus("Player 0 double-click on card to lead.");
-    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
     		//while (null == selected) delay(100);
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
             //selected = randomCard(hands[nextPlayer]);
         }
         // Lead with selected card
@@ -169,12 +165,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	        if (0 == nextPlayer) {
 	    		//hands[0].setTouchEnabled(true);
 	    		setStatus("Player 0 double-click on card to follow.");
-	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
 	    		//while (null == selected) delay(100);
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
 	            //selected = randomCard(hands[nextPlayer]);
 	        }
 	        // Follow with selected card

@@ -12,6 +12,11 @@ public abstract class CardGameProperties {
 	protected CardSelectionStrategyFactory selectionStrategyFactory;
 	protected ICardSelectionStrategy playerStrategies[];
 	
+	public enum Suit
+	{
+		SPADES, HEARTS, DIAMONDS, CLUBS
+	}
+	
 	public CardGameProperties() {
 		
 	}
