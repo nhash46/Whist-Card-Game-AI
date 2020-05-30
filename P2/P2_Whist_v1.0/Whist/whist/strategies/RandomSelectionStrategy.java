@@ -2,10 +2,11 @@ package strategies;
 
 import ch.aplu.jcardgame.Card;
 import ch.aplu.jcardgame.Hand;
-import properties.CardGameProperties.Suit;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+import properties.CardGameProperties.Suit;
 
 public class RandomSelectionStrategy implements ICardSelectionStrategy{
 	

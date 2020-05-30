@@ -1,7 +1,7 @@
 package strategies;
 
 import ch.aplu.jcardgame.*;
-import properties.CardGameProperties.Suit;;
+import properties.CardGameProperties.Suit;
 
 public interface ICardSelectionStrategy {
 	

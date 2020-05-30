@@ -2,6 +2,9 @@
 
 import properties.CardGameProperties;
 import properties.CardGameProperties.Suit;
+import properties.LegalProperties;
+import properties.CardGameProperties.Rank;
+
 import properties.OriginalProperties;
 
 import ch.aplu.jcardgame.*;
@@ -14,13 +17,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @SuppressWarnings("serial")
 public class Whist extends CardGame {
+	
+	/*public enum Suit
+	{
+		SPADES, HEARTS, DIAMONDS, CLUBS
+	}*/
 
-  public enum Rank
-  {
-    // Reverse order of rank importance (see rankGreater() below)
-	// Order of cards is tied to card images
-	ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO
-  }
+	/*public enum Rank
+	{
+		// Reverse order of rank importance (see rankGreater() below)
+		// Order of cards is tied to card images
+		ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO
+	}*/
   
   final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
 
@@ -138,6 +146,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	for (int i = 0; i < nbStartCards; i++) {
 		trick = new Hand(deck);
     	selected = null;
+    	lead = null;
         if (0 == nextPlayer) {  // Select lead depending on player type
     		//hands[0].setTouchEnabled(true);
     		setStatus("Player 0 double-click on card to lead.");
@@ -238,7 +247,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   
   public static void main(String[] args)
   {
-	  properties = new OriginalProperties();
+	  properties = new LegalProperties();
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }

@@ -16,14 +16,13 @@ public class CardSelectionStrategyFactory {
 			return new HumanSelectionStrategy();
 		}
 		
-		/*if(strategyType.equals("LEGAL")){
+		if(strategyType.equals("LEGAL")){
 			return new LegalSelectionStrategy();
 		}
 		
-		if(strategyType.equals("SMART")){
+		/*if(strategyType.equals("SMART")){
 			return new SmartSelectionStrategy();
 		}*/
-		
 		
 		return null;
 	}
