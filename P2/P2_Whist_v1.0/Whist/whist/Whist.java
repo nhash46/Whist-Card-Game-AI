@@ -2,6 +2,7 @@
 
 import properties.CardGameProperties;
 import properties.CardGameProperties.Suit;
+import properties.LegalProperties;
 import properties.OriginalProperties;
 
 import ch.aplu.jcardgame.*;
@@ -137,7 +138,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	Hand trick;
 	int winner;
 	Card winningCard;
-	Suit lead;
+	Suit lead = null;
 	int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
 	for (int i = 0; i < nbStartCards; i++) {
 		trick = new Hand(deck);
@@ -145,12 +146,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
         if (0 == nextPlayer) {  // Select lead depending on player type
     		//hands[0].setTouchEnabled(true);
     		setStatus("Player 0 double-click on card to lead.");
-    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], trumps, lead);
     		//while (null == selected) delay(100);
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], trumps, lead);
             //selected = randomCard(hands[nextPlayer]);
         }
         // Lead with selected card
@@ -169,12 +170,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	        if (0 == nextPlayer) {
 	    		//hands[0].setTouchEnabled(true);
 	    		setStatus("Player 0 double-click on card to follow.");
-	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], trumps, lead);
 	    		//while (null == selected) delay(100);
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer]);
+		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], trumps, lead);
 	            //selected = randomCard(hands[nextPlayer]);
 	        }
 	        // Follow with selected card
@@ -242,7 +243,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   
   public static void main(String[] args)
   {
-	  properties = new OriginalProperties();
+	  properties = new LegalProperties();
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }
