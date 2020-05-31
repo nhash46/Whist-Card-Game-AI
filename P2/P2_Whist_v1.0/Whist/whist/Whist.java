@@ -50,11 +50,8 @@ public class Whist extends CardGame {
   public boolean rankGreater(Card card1, Card card2) {
 	  return card1.getRankId() < card2.getRankId(); // Warning: Reverse rank order of cards (see comment on enum)
   }
-	 
+  
   private final String version = "1.0";
-  public final int nbPlayers = 4;
-  public final int nbStartCards = 13;
-  public final int winningScore = 11;
   private final int handWidth = 400;
   private final int trickWidth = 40;
   private final Deck deck = new Deck(Suit.values(), Rank.values(), "cover");
@@ -81,12 +78,12 @@ public class Whist extends CardGame {
 
   public void setStatus(String string) { setStatusText(string); }
   
-private int[] scores = new int[nbPlayers];
+private int[] scores = new int[properties.getNumberOfPlayers()];
 
 Font bigFont = new Font("Serif", Font.BOLD, 36);
 
 private void initScore() {
-	 for (int i = 0; i < nbPlayers; i++) {
+	 for (int i = 0; i < properties.getNumberOfPlayers(); i++) {
 		 scores[i] = 0;
 		 scoreActors[i] = new TextActor("0", Color.WHITE, bgColor, bigFont);
 		 addActor(scoreActors[i], scoreLocations[i]);
@@ -102,8 +99,8 @@ private void updateScore(int player) {
 private Card selected;
 
 private void initRound() {
-		 hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
-		 for (int i = 0; i < nbPlayers; i++) {
+		 hands = deck.dealingOut(properties.getNumberOfPlayers(), properties.getNumberOfStartCards()); // Last element of hands is leftover cards; these are ignored
+		 for (int i = 0; i < properties.getNumberOfPlayers(); i++) {
 			   hands[i].sort(Hand.SortType.SUITPRIORITY, true);
 		 }
 		 // Set up human player for interaction
@@ -115,8 +112,8 @@ private void initRound() {
 		hands[0].addCardListener(cardListener);
 		*/
 		 // graphics
-	    RowLayout[] layouts = new RowLayout[nbPlayers];
-	    for (int i = 0; i < nbPlayers; i++) {
+	    RowLayout[] layouts = new RowLayout[properties.getNumberOfPlayers()];
+	    for (int i = 0; i < properties.getNumberOfPlayers(); i++) {
 	      layouts[i] = new RowLayout(handLocations[i], handWidth);
 	      layouts[i].setRotationAngle(90 * i);
 	      // layouts[i].setStepDelay(10);
@@ -139,8 +136,8 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	int winner;
 	Card winningCard;
 	Suit lead = null;
-	int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
-	for (int i = 0; i < nbStartCards; i++) {
+	int nextPlayer = random.nextInt(properties.getNumberOfPlayers()); // randomly select player to lead for this round
+	for (int i = 0; i < properties.getNumberOfStartCards(); i++) {
 		trick = new Hand(deck);
     	selected = null;
         if (0 == nextPlayer) {  // Select lead depending on player type
@@ -164,8 +161,8 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 			winner = nextPlayer;
 			winningCard = selected;
 		// End Lead
-		for (int j = 1; j < nbPlayers; j++) {
-			if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
+		for (int j = 1; j < properties.getNumberOfPlayers(); j++) {
+			if (++nextPlayer >= properties.getNumberOfPlayers()) nextPlayer = 0;  // From last back to first
 			selected = null;
 	        if (0 == nextPlayer) {
 	    		//hands[0].setTouchEnabled(true);
@@ -217,7 +214,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 		setStatusText("Player " + nextPlayer + " wins trick.");
 		scores[nextPlayer]++;
 		updateScore(nextPlayer);
-		if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
+		if (properties.getWinningScore() == scores[nextPlayer]) return Optional.of(nextPlayer);
 	}
 	removeActor(trumpsActor);
 	return Optional.empty();
@@ -244,6 +241,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   public static void main(String[] args)
   {
 	  properties = new LegalProperties();
+	  
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }
