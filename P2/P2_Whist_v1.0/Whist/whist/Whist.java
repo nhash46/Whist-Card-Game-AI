@@ -1,6 +1,7 @@
 // Whist.java
 
 import properties.CardGameProperties;
+import properties.CardGameProperties.Suit;
 import properties.OriginalProperties;
 
 import ch.aplu.jcardgame.*;
@@ -14,10 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @SuppressWarnings("serial")
 public class Whist extends CardGame {
 	
-  public enum Suit
-  {
-    SPADES, HEARTS, DIAMONDS, CLUBS
-  }
+  
 
   public enum Rank
   {

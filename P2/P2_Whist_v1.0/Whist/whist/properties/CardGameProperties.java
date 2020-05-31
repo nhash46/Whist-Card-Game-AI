@@ -5,6 +5,11 @@ import strategies.ICardSelectionStrategy;
 
 public abstract class CardGameProperties {
 	
+	public enum Suit
+	  {
+	    SPADES, HEARTS, DIAMONDS, CLUBS
+	  }
+	
 	protected int nbPlayers;
 	protected int nbStartCards;
 	protected int winningScore;
