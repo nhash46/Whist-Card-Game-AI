@@ -31,11 +31,6 @@ public abstract class CardGameProperties {
 		
 	}
 	
-	/*public CardGameProperties(int nbPlayers, int nbStartCards, int winningScore) {
-		this.nbPlayers = nbPlayers;
-		this.nbStartCards = nbStartCards;
-		this.winningScore = winningScore; 
-	}*/
 	
 	public ICardSelectionStrategy[] getPlayeStrategies() {
 		return playerStrategies;

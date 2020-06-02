@@ -9,4 +9,6 @@ public class CardTotalGameProperties {
 	protected static Card cardsPlayed[];
 	protected static Card cardsPlayedPerPlayer[][];
 	
+	
+	
 }
