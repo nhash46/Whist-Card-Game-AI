@@ -16,6 +16,8 @@ public class OriginalProperties extends CardGameProperties{
 			playerStrategies[1] = selectionStrategyFactory.getCardSelectionStrategy("ORIGINAL");
 			playerStrategies[2] = selectionStrategyFactory.getCardSelectionStrategy("ORIGINAL");
 			playerStrategies[3] = selectionStrategyFactory.getCardSelectionStrategy("ORIGINAL");
+			
+			roundInfo = new CardRoundProperties(nbPlayers);
 		}
 		
 		

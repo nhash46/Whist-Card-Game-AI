@@ -3,8 +3,8 @@ import ch.aplu.jcardgame.Card;
 
 public class CardRoundProperties {
 	
-	public int turnsTaken;
-	public Card cardsPlayed[];
+	protected static int turnsTaken;
+	protected static Card cardsPlayed[];
 	
 	public CardRoundProperties(int nbPlayers) {
 		turnsTaken = 0;
@@ -13,6 +13,18 @@ public class CardRoundProperties {
 		for(int i = 0; i < nbPlayers; i++) {
 			cardsPlayed[i] = null;
 		}
+	}
+	
+	public CardRoundProperties() {
+		
+	}
+	
+	public int getTurnsTaken() {
+		return turnsTaken;
+	}
+	
+	public Card[] getCardsPlayed() {
+		return cardsPlayed;
 	}
 	
 }

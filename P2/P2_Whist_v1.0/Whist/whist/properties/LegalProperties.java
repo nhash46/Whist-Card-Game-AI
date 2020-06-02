@@ -16,6 +16,8 @@ public class LegalProperties extends CardGameProperties{
 			playerStrategies[1] = selectionStrategyFactory.getCardSelectionStrategy("LEGAL");
 			playerStrategies[2] = selectionStrategyFactory.getCardSelectionStrategy("LEGAL");
 			playerStrategies[3] = selectionStrategyFactory.getCardSelectionStrategy("LEGAL");
+			
+			roundInfo = new CardRoundProperties(nbPlayers);
 		}
 		
 		
