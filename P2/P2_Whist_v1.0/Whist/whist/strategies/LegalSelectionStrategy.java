@@ -17,10 +17,6 @@ public class LegalSelectionStrategy implements ICardSelectionStrategy{
 	
 	// Return card that is legally allowed to be played
 	public Card selectCard(Hand hand, Suit lead, Suit trump) {
-		System.out.println("here");
-		if(lead == null) {
-			System.out.println("lead == null");
-		}
 		if( lead != null ) {
 			int pos;
 			//Check if we can play a card from lead suit
@@ -38,7 +34,6 @@ public class LegalSelectionStrategy implements ICardSelectionStrategy{
 		//If we cannot play either, play a random card
 		Random random = ThreadLocalRandom.current();
 	    int x = random.nextInt(hand.getNumberOfCards());
-	    System.out.println();
 	    return hand.get(x);
 		
 	}

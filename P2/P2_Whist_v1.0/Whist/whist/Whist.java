@@ -7,6 +7,7 @@ import properties.CardGameProperties.Rank;
 import properties.OriginalProperties;
 import properties.LegalProperties;
 import properties.SmartProperties;
+
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 
