@@ -27,4 +27,12 @@ public class CardRoundProperties {
 		return cardsPlayed;
 	}
 	
+	public void addTurnTaken() {
+		turnsTaken = turnsTaken + 1;
+	}
+	
+	public void setCardsPlayed(int turnsTaken, Card card) {
+		cardsPlayed[turnsTaken] = card;
+	}
+	
 }

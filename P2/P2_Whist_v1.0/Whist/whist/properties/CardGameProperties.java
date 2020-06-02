@@ -40,4 +40,23 @@ public abstract class CardGameProperties {
 	public ICardSelectionStrategy[] getPlayeStrategies() {
 		return playerStrategies;
 	}
+	
+	
+	
+	public int getNumPlayers() {
+		return nbPlayers;
+	}
+	
+	public int getNumStartCards() {
+		return nbStartCards;
+	}
+	
+	public int getWinningScore() {
+		return winningScore;
+	}
+	
+	public CardRoundProperties getRoundInfo() {
+		return roundInfo;
+	}
+	
 }
