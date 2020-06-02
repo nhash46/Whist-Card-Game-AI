@@ -40,8 +40,6 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 			}
 		}
 		
-		// Need to sort list
-		
 		if( legalCards.isEmpty() ) {
 			//If no legal cards, play card with lowest rank
 			//selected = selectLowest(hand);
@@ -54,7 +52,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 					// If maxLead() is not a winner, play minLead()
 				}
 				// else we have we have a trump suit
-				else {
+				else if( hasSuit(hand, trump) == true ) {
 					// If minTrump() is a winner, play it
 					// If minTrump() is not a winner, play minTrump()
 				}
@@ -88,10 +86,36 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	
-	public Card findWinner() {
+	public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
 		
+		Card currWinner = null;
+		int cardsPlayedLen = 0;
+		while(cardsPlayed[cardsPlayedLen] != null) {
+			
+			if(currWinner == null) {
+				currWinner = cardsPlayed[cardsPlayedLen];
+				continue;
+			}
+			
+			if( cardsPlayed[cardsPlayedLen].getSuit().toString().equals(trump.toString()) ) {
+				// Lower int is better for rank
+				if( cardsPlayed[cardsPlayedLen].getRankId() < currWinner.getRankId() ) {
+					currWinner = cardsPlayed[cardsPlayedLen];
+				}
+			}
+			
+			if( cardsPlayed[cardsPlayedLen].getSuit().toString().equals(lead.toString()) ) {
+				if(currWinner.getSuit().toString().equals(trump.toString())) {
+					continue;
+				}
+				if( cardsPlayed[cardsPlayedLen].getRankId() < currWinner.getRankId() ) {
+					currWinner = cardsPlayed[cardsPlayedLen];
+				}
+			}
+			cardsPlayedLen++;
+		}
 		
-		
+		return currWinner;
 	}
 	  
 	  
