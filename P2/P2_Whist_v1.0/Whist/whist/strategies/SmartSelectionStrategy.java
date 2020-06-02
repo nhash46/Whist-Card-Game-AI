@@ -53,8 +53,8 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				}
 				// else we have we have a trump suit
 				else if( hasSuit(hand, trump) == true ) {
-					// If minTrump() is a winner, play it
-					// If minTrump() is not a winner, play minTrump()
+					// If maxTrump() is a winner, play it
+					// If maxTrump() is not a winner, play minTrump()
 				}
 		}
 		
