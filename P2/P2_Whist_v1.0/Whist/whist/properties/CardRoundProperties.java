@@ -31,8 +31,18 @@ public class CardRoundProperties {
 		turnsTaken = turnsTaken + 1;
 	}
 	
+	public void resetTurnsTaken() {
+		turnsTaken = 0;
+	}
+	
 	public void setCardsPlayed(int turnsTaken, Card card) {
 		cardsPlayed[turnsTaken] = card;
+	}
+	
+	public void resetCardsPlayed() {
+		for(int i = 0; i < cardsPlayed.length; i++) {
+			cardsPlayed[i] = null;
+		}
 	}
 	
 }

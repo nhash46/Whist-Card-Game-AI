@@ -2,10 +2,10 @@
 
 import properties.CardGameProperties;
 import properties.CardGameProperties.Suit;
-import properties.LegalProperties;
 import properties.CardGameProperties.Rank;
 
 import properties.OriginalProperties;
+import properties.LegalProperties;
 import properties.SmartProperties;
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
@@ -45,9 +45,6 @@ public class Whist extends CardGame {
   }
 	 
   private final String version = "1.0";
-  public final int nbPlayers = 4;
-  public final int nbStartCards = 13;
-  public final int winningScore = 11;
   private final int handWidth = 400;
   private final int trickWidth = 40;
   private final Deck deck = new Deck(Suit.values(), Rank.values(), "cover");
@@ -74,12 +71,12 @@ public class Whist extends CardGame {
 
   public void setStatus(String string) { setStatusText(string); }
   
-private int[] scores = new int[nbPlayers];
+private int[] scores = new int[properties.getNumPlayers()];
 
 Font bigFont = new Font("Serif", Font.BOLD, 36);
 
 private void initScore() {
-	 for (int i = 0; i < nbPlayers; i++) {
+	 for (int i = 0; i < properties.getNumPlayers(); i++) {
 		 scores[i] = 0;
 		 scoreActors[i] = new TextActor("0", Color.WHITE, bgColor, bigFont);
 		 addActor(scoreActors[i], scoreLocations[i]);
@@ -95,14 +92,14 @@ private void updateScore(int player) {
 private Card selected;
 
 private void initRound() {
-		 hands = deck.dealingOut(nbPlayers, nbStartCards); // Last element of hands is leftover cards; these are ignored
-		 for (int i = 0; i < nbPlayers; i++) {
+		 hands = deck.dealingOut(properties.getNumPlayers(), properties.getNumStartCards()); // Last element of hands is leftover cards; these are ignored
+		 for (int i = 0; i < properties.getNumPlayers(); i++) {
 			   hands[i].sort(Hand.SortType.SUITPRIORITY, true);
 		 }
 		 
 		 // graphics
-	    RowLayout[] layouts = new RowLayout[nbPlayers];
-	    for (int i = 0; i < nbPlayers; i++) {
+	    RowLayout[] layouts = new RowLayout[properties.getNumPlayers()];
+	    for (int i = 0; i < properties.getNumPlayers(); i++) {
 	      layouts[i] = new RowLayout(handLocations[i], handWidth);
 	      layouts[i].setRotationAngle(90 * i);
 	      // layouts[i].setStepDelay(10);
@@ -125,22 +122,22 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	int winner;
 	Card winningCard;
 	Suit lead = null;
-	int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
-	for (int i = 0; i < nbStartCards; i++) {
+	int nextPlayer = random.nextInt(properties.getNumPlayers()); // randomly select player to lead for this round
+	for (int i = 0; i < properties.getNumStartCards(); i++) {
 		trick = new Hand(deck);
     	selected = null;
     	lead = null;
+    	properties.getRoundInfo().resetTurnsTaken();
+    	properties.getRoundInfo().resetCardsPlayed();
         if (0 == nextPlayer) {  // Select lead depending on player type
-    		//hands[0].setTouchEnabled(true);
     		setStatus("Player 0 double-click on card to lead.");
-    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
-    		//while (null == selected) delay(100);
         } else {
     		setStatusText("Player " + nextPlayer + " thinking...");
             delay(thinkingTime);
-            selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
-            //selected = randomCard(hands[nextPlayer]);
         }
+        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
+        properties.getRoundInfo().setCardsPlayed(properties.getRoundInfo().getTurnsTaken(), selected);
+        properties.getRoundInfo().addTurnTaken();
         // Lead with selected card
 	        trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
 			trick.draw();
@@ -151,20 +148,18 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 			winner = nextPlayer;
 			winningCard = selected;
 		// End Lead
-		for (int j = 1; j < nbPlayers; j++) {
-			if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
+		for (int j = 1; j < properties.getNumPlayers(); j++) {
+			if (++nextPlayer >= properties.getNumPlayers()) nextPlayer = 0;  // From last back to first
 			selected = null;
 	        if (0 == nextPlayer) {
-	    		//hands[0].setTouchEnabled(true);
 	    		setStatus("Player 0 double-click on card to follow.");
-	    		selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
-	    		//while (null == selected) delay(100);
 	        } else {
 		        setStatusText("Player " + nextPlayer + " thinking...");
 		        delay(thinkingTime);
-		        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
-	            //selected = randomCard(hands[nextPlayer]);
 	        }
+	        selected = properties.getPlayeStrategies()[nextPlayer].selectCard(hands[nextPlayer], lead, trumps);
+	        properties.getRoundInfo().setCardsPlayed(properties.getRoundInfo().getTurnsTaken(), selected);
+	        properties.getRoundInfo().addTurnTaken();
 	        // Follow with selected card
 		        trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
 				trick.draw();
@@ -204,7 +199,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 		setStatusText("Player " + nextPlayer + " wins trick.");
 		scores[nextPlayer]++;
 		updateScore(nextPlayer);
-		if (winningScore == scores[nextPlayer]) return Optional.of(nextPlayer);
+		if (properties.getWinningScore() == scores[nextPlayer]) return Optional.of(nextPlayer);
 	}
 	removeActor(trumpsActor);
 	return Optional.empty();

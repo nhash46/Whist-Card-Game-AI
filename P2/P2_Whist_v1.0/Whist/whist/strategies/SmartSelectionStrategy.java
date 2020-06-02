@@ -17,10 +17,10 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		
 		CardRoundProperties properties = new CardRoundProperties();
 		
-		System.out.println("turns Taken: " + properties.getTurnsTaken());
+		System.out.println("Turns taken in round before this smart player: " + properties.getTurnsTaken());
 		System.out.println("Cards Played: ");
 		for(int i = 0; i < properties.getTurnsTaken(); i++) {
-			System.out.println(properties.getCardsPlayed()[i]);
+			System.out.println(properties.getCardsPlayed()[i].toString());
 		}
 		
 		// Get a list of legal cards
