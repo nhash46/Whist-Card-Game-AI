@@ -20,9 +20,9 @@ public class CardSelectionStrategyFactory {
 			return new LegalSelectionStrategy();
 		}
 		
-		/*if(strategyType.equals("SMART")){
+		if(strategyType.equals("SMART")){
 			return new SmartSelectionStrategy();
-		}*/
+		}
 		
 		return null;
 	}

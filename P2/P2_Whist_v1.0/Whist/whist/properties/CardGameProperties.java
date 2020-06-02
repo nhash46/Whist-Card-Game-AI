@@ -12,6 +12,8 @@ public abstract class CardGameProperties {
 	protected CardSelectionStrategyFactory selectionStrategyFactory;
 	protected ICardSelectionStrategy playerStrategies[];
 	
+	protected CardRoundProperties roundInfo;
+	
 	public enum Suit
 	{
 		SPADES, HEARTS, DIAMONDS, CLUBS
@@ -29,11 +31,11 @@ public abstract class CardGameProperties {
 		
 	}
 	
-	public CardGameProperties(int nbPlayers, int nbStartCards, int winningScore) {
+	/*public CardGameProperties(int nbPlayers, int nbStartCards, int winningScore) {
 		this.nbPlayers = nbPlayers;
 		this.nbStartCards = nbStartCards;
 		this.winningScore = winningScore; 
-	}
+	}*/
 	
 	public ICardSelectionStrategy[] getPlayeStrategies() {
 		return playerStrategies;

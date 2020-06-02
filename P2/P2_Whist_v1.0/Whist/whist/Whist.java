@@ -6,7 +6,7 @@ import properties.LegalProperties;
 import properties.CardGameProperties.Rank;
 
 import properties.OriginalProperties;
-
+import properties.SmartProperties;
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 
@@ -247,7 +247,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   
   public static void main(String[] args)
   {
-	  properties = new LegalProperties();
+	  properties = new SmartProperties();
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }

@@ -7,8 +7,8 @@ public class LegalProperties extends CardGameProperties{
 
 		public LegalProperties() {
 			nbPlayers = 4;			//Confirm these values with the peeps in charge
-			nbStartCards = 13;		//Confirm these values with the peeps in charge
-			winningScore = 20;		//Confirm these values with the peeps in charge
+			nbStartCards = 4;		//Confirm these values with the peeps in charge
+			winningScore = 6;		//Confirm these values with the peeps in charge
 			playerStrategies = new ICardSelectionStrategy[nbPlayers];
 			
 			selectionStrategyFactory = new CardSelectionStrategyFactory();
