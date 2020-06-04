@@ -26,7 +26,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 			System.out.println(properties.getCardsPlayed()[i].toString());
 		}
 		
-		ArrayList<Card> legalCards = new ArrayList<Card>();
+		/*ArrayList<Card> legalCards = new ArrayList<Card>();
 		// Get a list of legal cards
 		if( lead == null ) {
 			legalCards = hand.getCardList();
@@ -38,11 +38,11 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 					legalCards.add(hand.get(i));
 				}
 			}
-		}
+		}*/
 		
-		if( legalCards.isEmpty() ) {
+		/*if( legalCards.isEmpty() ) {
 			//If no legal cards, play card with lowest rank
-			//selected = selectLowest(hand);
+			//return selectLowest(hand);
 			//for now play any random card
 		}
 		else {
@@ -56,17 +56,59 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 					// If maxTrump() is a winner, play it
 					// If maxTrump() is not a winner, play minTrump()
 				}
-		}
+		}*/
 		
-		selected = 1;
-		return hand.get(selected);
+		Card selectedCard = selectLowest(hand);
+
+		
+		return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 	}
 	
 	
 	
-	public int selectLowest(Hand hand) {
+	public Card selectLowest(Hand hand) {
 		
-		return 0;
+		ArrayList<Card> cards = hand.getCardList();
+		
+		// Get Lowest Rank
+		Rank lowestRank = null;
+		Rank ranks[] = Rank.values();
+		for(int i = ranks.length - 1; i >= 0; i--) {
+			System.out.println(ranks[i]);
+			for(Card card : cards) {
+				if(card.getRank().toString().equals(ranks[i].toString())) {
+					lowestRank = ranks[i];
+					break;
+				}
+			}
+			if(lowestRank != null) {
+				System.out.println("Lowest Rank in hand: " + lowestRank);
+				break;
+			}
+		}
+		
+		// Get most populated suit that has the lowest rank
+		Suit suits[] = Suit.values();
+		Suit mostPopulated = null;
+		int currMaxPopulation = 0;
+		int currPopulation;
+		for(int i = 0; i < suits.length; i++) {
+			currPopulation = 0;
+			for(Card card : cards) {
+				if(card.getSuit().toString().equals(suits[i].toString())) {
+					currPopulation++;
+				}
+			}
+			if(currPopulation > currMaxPopulation) {
+				currMaxPopulation = currPopulation;
+				mostPopulated = suits[i];
+			}
+		}
+		
+		Card selectedCard = hand.getCard(mostPopulated, lowestRank);
+		//System.out.println("Suit: "+ mostPopulated + " Rank: " +lowestRank);
+		//System.out.println(selectedCard);
+		return selectedCard;
 	}
 	
 	
