@@ -265,5 +265,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 
 		}
 	  
-	  return false;
+	}
+	
+	
 }
