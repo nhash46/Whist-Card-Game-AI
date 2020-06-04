@@ -213,7 +213,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	// Returns true if incoming wins over currWinner 
 	public boolean isWinner(Card incoming, Card currWinner, Suit lead, Suit trump) {
 		
-		if(currWinner == null) {
+		if( (currWinner == null) || (lead == null) ) {
 			return true;
 		}
 		

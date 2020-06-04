@@ -12,7 +12,7 @@ public class SmartProperties extends CardGameProperties{
 		playerStrategies = new ICardSelectionStrategy[nbPlayers];
 		
 		selectionStrategyFactory = new CardSelectionStrategyFactory();
-		playerStrategies[0] = selectionStrategyFactory.getCardSelectionStrategy("HUMAN");
+		playerStrategies[0] = selectionStrategyFactory.getCardSelectionStrategy("SMART");
 		playerStrategies[1] = selectionStrategyFactory.getCardSelectionStrategy("SMART");
 		playerStrategies[2] = selectionStrategyFactory.getCardSelectionStrategy("SMART");
 		playerStrategies[3] = selectionStrategyFactory.getCardSelectionStrategy("SMART");
