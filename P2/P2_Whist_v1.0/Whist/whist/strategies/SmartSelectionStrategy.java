@@ -66,10 +66,14 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				
 			}
 			
-			if( /*We have to play a burner card*/ ) {
-				//Play card with lowest rank and in most populated suit
+			if( /*We are starting, want to play a max card*/ ) {
+				//Play a max card, any suit
 			}
 			
+		}
+		
+		if( /*We have to play a burner card*/ ) {
+			//Play card with lowest rank and in most populated suit
 		}
 		
 		
