@@ -191,10 +191,79 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	
-	public Card findWinner(Card card1, Card card2, Suit lead, Suit trump) {
+	// Returns true if incoming wins over currWinner 
+	public boolean isWinner(Card incoming, Card currWinner, Suit lead, Suit trump) {
 		
-	
-	}
+		// card2 is lead
+		if( currWinner.getSuit().toString().equals(lead.toString()) ) {
+			
+			// card2 is lead and trump
+			if( currWinner.getSuit().toString().equals(trump.toString()) ) {
+				
+				if( incoming.getSuit().toString().equals(trump.toString()) ) {
+					if( incoming.getRankId() < currWinner.getRankId() ) {
+						return true;
+					}
+					else {
+						return false;
+					}
+				}
+				else {
+					return false;
+				}
+				
+			}
+			
+			if( incoming.getSuit().toString().equals(trump.toString()) ) {
+				return true;
+			}
+			else if( incoming.getSuit().toString().equals(lead.toString()) ) {
+				if( incoming.getRankId() < currWinner.getRankId() ) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+				
+		}
+		
+		// card2 is trump
+		else if( currWinner.getSuit().toString().equals(trump.toString()) ) {
+			
+			if( incoming.getSuit().toString().equals(trump.toString()) ) {
+				if( incoming.getRankId() < currWinner.getRankId() ) {
+					return false;
+				}
+				else {
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+			
+		}
+		
+		// card2 is neither lead or trump
+		else {
+			if( incoming.getSuit().toString().equals(lead.toString()) 
+					|| incoming.getSuit().toString().equals(trump.toString())) {
+				return true;
+			}
+			else {
+				if( incoming.getRankId() < currWinner.getRankId() ) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+
+		}
 	  
-	  
+	  return false;
 }
