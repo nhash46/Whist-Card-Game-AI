@@ -49,6 +49,10 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				
 			}
 			
+			if( /*We have to play a burner card*/ ) {
+				//Play card with lowest rank and in most populated suit
+			}
+			
 		}
 		// Else we look to trump suit
 		else {
@@ -62,10 +66,12 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				
 			}
 			
+			if( /*We have to play a burner card*/ ) {
+				//Play card with lowest rank and in most populated suit
+			}
+			
 		}
-		if( true /*We have to play a burner card*/ ) {
-			//Play card with lowest rank and in most populated suit
-		}
+		
 		
 		Card selectedCard = selectLowest(hand);
 
@@ -150,6 +156,28 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		
 		return selectedIndex;
+	}
+	
+	
+	// Gets the maximum ranked card from a specified suit from a given hand
+	public int maxSuit(Hand hand, Suit suit) {
+		
+		ArrayList<Card> suitCardList =  hand.getCardsWithSuit(suit);
+		
+		Card maxCard = suitCardList.get(0);
+		for (int i = 1; i < suitCardList.size(); i++) {
+			if ( maxCard.getRankId() < suitCardList.get(i).getRankId()) {
+				maxCard = suitCardList.get(i);
+			}
+		}
+		
+		int pos = 0;
+		for (int i = 0; i < suitCardList.size()-1; i++ ) {
+			if (suitCardList.get(i) == maxCard) {
+				pos = i;
+			}
+		}
+		return pos ;
 	}
 	
 	
