@@ -121,7 +121,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	// End trump suit
 	Hand trick;
 	int winner;
-	Card winningCard;
+	//Card winningCard;
 	Suit lead = null;
 	int nextPlayer = random.nextInt(properties.getNumPlayers()); // randomly select player to lead for this round
 	for (int i = 0; i < properties.getNumStartCards(); i++) {
@@ -147,7 +147,8 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 			lead = (Suit) selected.getSuit();
 			selected.transfer(trick, true); // transfer to trick (includes graphic effect)
 			winner = nextPlayer;
-			winningCard = selected;
+			properties.getRoundInfo().setWinningCard(selected);
+			//winningCard = selected;
 		// End Lead
 		for (int j = 1; j < properties.getNumPlayers(); j++) {
 			if (++nextPlayer >= properties.getNumPlayers()) nextPlayer = 0;  // From last back to first
@@ -181,15 +182,15 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 					 }
 				// End Check
 				 selected.transfer(trick, true); // transfer to trick (includes graphic effect)
-				 System.out.println("winning: suit = " + winningCard.getSuit() + ", rank = " + winningCard.getRankId());
+				 System.out.println("winning: suit = " + properties.getRoundInfo().getWinningCard().getSuit() + ", rank = " + properties.getRoundInfo().getWinningCard().getRankId());
 				 System.out.println(" played: suit = " +    selected.getSuit() + ", rank = " +    selected.getRankId());
 				 if ( // beat current winner with higher card
-					 (selected.getSuit() == winningCard.getSuit() && rankGreater(selected, winningCard)) ||
+					 (selected.getSuit() == properties.getRoundInfo().getWinningCard().getSuit() && rankGreater(selected, properties.getRoundInfo().getWinningCard())) ||
 					  // trumped when non-trump was winning
-					 (selected.getSuit() == trumps && winningCard.getSuit() != trumps)) {
+					 (selected.getSuit() == trumps && properties.getRoundInfo().getWinningCard().getSuit() != trumps)) {
 					 System.out.println("NEW WINNER");
 					 winner = nextPlayer;
-					 winningCard = selected;
+					 properties.getRoundInfo().setWinningCard(selected);
 				 }
 			// End Follow
 		}

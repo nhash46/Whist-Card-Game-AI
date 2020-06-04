@@ -5,9 +5,11 @@ public class CardRoundProperties {
 	
 	protected static int turnsTaken;
 	protected static Card cardsPlayed[];
+	protected static Card winningCard;
 	
 	public CardRoundProperties(int nbPlayers) {
 		turnsTaken = 0;
+		winningCard = null;
 		
 		cardsPlayed = new Card[nbPlayers];
 		for(int i = 0; i < nbPlayers; i++) {
@@ -44,5 +46,14 @@ public class CardRoundProperties {
 			cardsPlayed[i] = null;
 		}
 	}
+	
+	public void setWinningCard(Card newWinner) {
+		winningCard = newWinner;
+	}
+	
+	public Card getWinningCard() {
+		return winningCard;
+	}
+	
 	
 }

@@ -29,7 +29,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		
 
 		// If a lead suit exists
-		if(lead != null) {
+		/*if(lead != null) {
 			
 			// If we can play a lead
 			if( hasSuit(hand, lead) == true ) {
@@ -49,8 +49,9 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				
 			}
 			
-			if( /*We have to play a burner card*/ ) {
-				//Play card with lowest rank and in most populated suit
+			if( We have to play a burner card ) {
+				Card selectedCard = selectLowest(hand);
+				return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 			}
 			
 		}
@@ -65,16 +66,17 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				// If maxTrump() is not a winner, play minTrump()
 				
 			}
-			
-			if( /*We are starting, want to play a max card*/ ) {
+		
+			if( We are starting, want to play a max card ) {
 				//Play a max card, any suit
 			}
 			
 		}
 		
-		if( /*We have to play a burner card*/ ) {
-			//Play card with lowest rank and in most populated suit
-		}
+		if( We have to play a burner card ) {
+			Card selectedCard = selectLowest(hand);
+			return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+		}*/
 		
 		
 		Card selectedCard = selectLowest(hand);
@@ -85,9 +87,9 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	
 	
 	
+	//Play card with lowest rank and in most populated suit
 	public Card selectLowest(Hand hand) {
-		
-		System.out.println("hand:\n"+hand.toString());
+
 		ArrayList<Card> cards = hand.getCardList();
 		
 		// Get Lowest Rank
@@ -139,7 +141,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	
 	
 	// Gets the minimum ranked card from a specified suit from a given hand
-	public int minSuit(Hand hand, Suit suit) {
+	public Card minSuit(Hand hand, Suit suit) {
 		
 		Card selected;
 		int selectedIndex = 0;
@@ -153,18 +155,12 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		selected = suitCards.get(currMin);
 		
-		for(int i = 0; i < hand.getNumberOfCards(); i++) {
-			if(hand.get(i) == selected) {
-				selectedIndex = i;
-			}
-		}
-		
-		return selectedIndex;
+		return selected;
 	}
 	
 	
 	// Gets the maximum ranked card from a specified suit from a given hand
-	public int maxSuit(Hand hand, Suit suit) {
+	public Card maxSuit(Hand hand, Suit suit) {
 		
 		ArrayList<Card> suitCardList =  hand.getCardsWithSuit(suit);
 		
@@ -174,14 +170,8 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				maxCard = suitCardList.get(i);
 			}
 		}
-		
-		int pos = 0;
-		for (int i = 0; i < suitCardList.size()-1; i++ ) {
-			if (suitCardList.get(i) == maxCard) {
-				pos = i;
-			}
-		}
-		return pos ;
+	
+		return maxCard;
 	}
 	
 	
@@ -201,36 +191,9 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	
-	public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
+	public Card findWinner(Card card1, Card card2, Suit lead, Suit trump) {
 		
-		Card currWinner = null;
-		int cardsPlayedLen = 0;
-		while(cardsPlayed[cardsPlayedLen] != null) {
-			
-			if(currWinner == null) {
-				currWinner = cardsPlayed[cardsPlayedLen];
-				continue;
-			}
-			
-			if( cardsPlayed[cardsPlayedLen].getSuit().toString().equals(trump.toString()) ) {
-				// Lower int is better for rank
-				if( cardsPlayed[cardsPlayedLen].getRankId() < currWinner.getRankId() ) {
-					currWinner = cardsPlayed[cardsPlayedLen];
-				}
-			}
-			
-			if( cardsPlayed[cardsPlayedLen].getSuit().toString().equals(lead.toString()) ) {
-				if(currWinner.getSuit().toString().equals(trump.toString())) {
-					continue;
-				}
-				if( cardsPlayed[cardsPlayedLen].getRankId() < currWinner.getRankId() ) {
-					currWinner = cardsPlayed[cardsPlayedLen];
-				}
-			}
-			cardsPlayedLen++;
-		}
-		
-		return currWinner;
+	
 	}
 	  
 	  
