@@ -26,37 +26,34 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 			System.out.println(properties.getCardsPlayed()[i].toString());
 		}
 		
-		/*ArrayList<Card> legalCards = new ArrayList<Card>();
-		// Get a list of legal cards
-		if( lead == null ) {
-			legalCards = hand.getCardList();
-		}
-		else{
-			for(int i = 0; i < hand.getNumberOfCards(); i++) {
-				if( (hand.get(i).getSuit().toString().equals(lead.toString())) || 
-						(hand.get(i).getSuit().toString().equals(trump.toString())) ) {
-					legalCards.add(hand.get(i));
-				}
-			}
-		}*/
 		
-		/*if( legalCards.isEmpty() ) {
-			//If no legal cards, play card with lowest rank
-			//return selectLowest(hand);
-			//for now play any random card
+
+		// If a lead suit exists
+		if(lead != null) {
+			
+			// If we can play a lead
+			if( hasSuit(hand, lead) == true ) {
+				
+				// If maxLead() is a winner, play it
+				
+				// If maxLead() is not a winner, play minLead()
+				
+			}	
+			
 		}
+		// Else we look to trump suit
 		else {
-				// If we have a lead suit
-				if( hasSuit(hand, lead) == true ) {
-					// If maxLead() is a winner, play it
-					// If maxLead() is not a winner, play minLead()
-				}
-				// else we have we have a trump suit
-				else if( hasSuit(hand, trump) == true ) {
-					// If maxTrump() is a winner, play it
-					// If maxTrump() is not a winner, play minTrump()
-				}
-		}*/
+			if( hasSuit(hand, trump) == true ) {
+				
+				// If maxTrump() is a winner, play it
+				
+				// If maxTrump() is not a winner, play minTrump()
+				
+			}
+		}
+		if( true /*We have to play a burner card*/ ) {
+			//Play card with lowest rank and in most populated suit
+		}
 		
 		Card selectedCard = selectLowest(hand);
 
@@ -141,7 +138,6 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		
 		return selectedIndex;
-		
 	}
 	
 	
@@ -161,7 +157,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	
-	/*public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
+	public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
 		
 		Card currWinner = null;
 		int cardsPlayedLen = 0;
@@ -191,7 +187,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		
 		return currWinner;
-	}*/
+	}
 	  
 	  
 }
