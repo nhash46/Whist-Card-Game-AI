@@ -101,7 +101,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		//selectedCard = maxSuit(hand, lead);
 		//selectedCard = minSuit(hand, trump);
 		//selectedCard = maxSuit(hand, trump);
-		return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+		//return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 	}
 	
 	
