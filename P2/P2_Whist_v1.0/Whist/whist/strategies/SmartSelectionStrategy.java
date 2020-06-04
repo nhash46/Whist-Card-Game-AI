@@ -38,11 +38,9 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				
 				// If maxLead() is not a winner, play minLead()
 				
-			}	
+			}
 			
-		}
-		// Else we look to trump suit
-		else {
+			// If we can play a trump
 			if( hasSuit(hand, trump) == true ) {
 				
 				// If maxTrump() is a winner, play it
@@ -50,6 +48,20 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				// If maxTrump() is not a winner, play minTrump()
 				
 			}
+			
+		}
+		// Else we look to trump suit
+		else {
+			
+			// If we can play a trump
+			if( hasSuit(hand, trump) == true ) {
+				
+				// If maxTrump() is a winner, play it
+				
+				// If maxTrump() is not a winner, play minTrump()
+				
+			}
+			
 		}
 		if( true /*We have to play a burner card*/ ) {
 			//Play card with lowest rank and in most populated suit
