@@ -68,13 +68,13 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	
 	public Card selectLowest(Hand hand) {
 		
+		System.out.println("hand:\n"+hand.toString());
 		ArrayList<Card> cards = hand.getCardList();
 		
 		// Get Lowest Rank
 		Rank lowestRank = null;
 		Rank ranks[] = Rank.values();
 		for(int i = ranks.length - 1; i >= 0; i--) {
-			System.out.println(ranks[i]);
 			for(Card card : cards) {
 				if(card.getRank().toString().equals(ranks[i].toString())) {
 					lowestRank = ranks[i];
@@ -82,7 +82,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 				}
 			}
 			if(lowestRank != null) {
-				System.out.println("Lowest Rank in hand: " + lowestRank);
+				//System.out.println("Lowest Rank in hand: " + lowestRank);
 				break;
 			}
 		}
@@ -92,23 +92,56 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		Suit mostPopulated = null;
 		int currMaxPopulation = 0;
 		int currPopulation;
+		boolean applicible;
 		for(int i = 0; i < suits.length; i++) {
 			currPopulation = 0;
+			applicible = false;
 			for(Card card : cards) {
 				if(card.getSuit().toString().equals(suits[i].toString())) {
 					currPopulation++;
+					if( card.getRank().toString().equals(lowestRank.toString()) ) {
+						applicible = true;
+					}
 				}
 			}
 			if(currPopulation > currMaxPopulation) {
-				currMaxPopulation = currPopulation;
-				mostPopulated = suits[i];
+				if(applicible == true) {
+					currMaxPopulation = currPopulation;
+					mostPopulated = suits[i];
+				}
 			}
 		}
 		
 		Card selectedCard = hand.getCard(mostPopulated, lowestRank);
-		//System.out.println("Suit: "+ mostPopulated + " Rank: " +lowestRank);
-		//System.out.println(selectedCard);
+		System.out.println("Suit: "+ mostPopulated + " Rank: " +lowestRank);
+		System.out.println(selectedCard);
 		return selectedCard;
+	}
+	
+	
+	// Gets the minimum ranked card from a specified suit from a given hand
+	public int minSuit(Hand hand, Suit suit) {
+		
+		Card selected;
+		int selectedIndex = 0;
+		int currMin = 0;
+		ArrayList<Card> suitCards = hand.getCardsWithSuit(suit);
+		for(int i = 1; i < suitCards.size(); i++) {
+			// if i is less than currentMin (reverse order)
+			if(suitCards.get(i).getRankId() > suitCards.get(currMin).getRankId()) {
+				currMin = i;
+			}
+		}
+		selected = suitCards.get(currMin);
+		
+		for(int i = 0; i < hand.getNumberOfCards(); i++) {
+			if(hand.get(i) == selected) {
+				selectedIndex = i;
+			}
+		}
+		
+		return selectedIndex;
+		
 	}
 	
 	
@@ -128,7 +161,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	}
 	
 	
-	public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
+	/*public Card findWinner(Card[] cardsPlayed, Suit lead, Suit trump) {
 		
 		Card currWinner = null;
 		int cardsPlayedLen = 0;
@@ -158,7 +191,7 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		
 		return currWinner;
-	}
+	}*/
 	  
 	  
 }
