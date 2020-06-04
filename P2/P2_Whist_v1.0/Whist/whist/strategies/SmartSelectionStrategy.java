@@ -209,6 +209,10 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	// Returns true if incoming wins over currWinner 
 	public boolean isWinner(Card incoming, Card currWinner, Suit lead, Suit trump) {
 		
+		if(currWinner == null) {
+			return true;
+		}
+		
 		// card2 is lead
 		if( currWinner.getSuit().toString().equals(lead.toString()) ) {
 			
