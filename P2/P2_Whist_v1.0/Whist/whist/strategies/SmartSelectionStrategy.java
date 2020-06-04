@@ -17,7 +17,6 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 	// return random Card from Hand
 	public Card selectCard(Hand hand, Suit lead, Suit trump){
 		
-		int selected;
 		CardRoundProperties properties = new CardRoundProperties();
 		
 		System.out.println("Turns taken in round before this smart player: " + properties.getTurnsTaken());
@@ -27,30 +26,44 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 		}
 		
 		
-
+		Card selectedCard;
 		// If a lead suit exists
-		/*if(lead != null) {
+		if(lead != null) {
 			
 			// If we can play a lead
 			if( hasSuit(hand, lead) == true ) {
 				
 				// If maxLead() is a winner, play it
-				
+				selectedCard = maxSuit(hand, lead);
+				if(isWinner(selectedCard, properties.getWinningCard(), lead, trump) == true) {
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				// If maxLead() is not a winner, play minLead()
+				else {
+					selectedCard = minSuit(hand, lead);
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				
 			}
 			
 			// If we can play a trump
-			if( hasSuit(hand, trump) == true ) {
+			else if( hasSuit(hand, trump) == true ) {
 				
 				// If maxTrump() is a winner, play it
-				
+				selectedCard = maxSuit(hand, trump);
+				if(isWinner(selectedCard, properties.getWinningCard(), lead, trump) == true) {
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				// If maxTrump() is not a winner, play minTrump()
+				else {
+					selectedCard = minSuit(hand, trump);
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				
 			}
 			
-			if( We have to play a burner card ) {
-				Card selectedCard = selectLowest(hand);
+			else {
+				selectedCard = selectLowest(hand);
 				return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 			}
 			
@@ -62,27 +75,29 @@ public class SmartSelectionStrategy implements ICardSelectionStrategy{
 			if( hasSuit(hand, trump) == true ) {
 				
 				// If maxTrump() is a winner, play it
-				
+				selectedCard = maxSuit(hand, trump);
+				if(isWinner(selectedCard, properties.getWinningCard(), lead, trump) == true) {
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				// If maxTrump() is not a winner, play minTrump()
+				else {
+					selectedCard = minSuit(hand, trump);
+					return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+				}
 				
 			}
-		
-			if( We are starting, want to play a max card ) {
-				//Play a max card, any suit
+			
+			//Play a max card, any suit, for now play min cause select max function not done yet
+			else {
+				selectedCard = selectLowest(hand);
+				return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 			}
 			
 		}
 		
-		if( We have to play a burner card ) {
-			Card selectedCard = selectLowest(hand);
-			return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
-		}*/
-		
-		
-		Card selectedCard = selectLowest(hand);
 
-		
-		return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
+		//selectedCard = selectLowest(hand);
+		//return hand.getCard(selectedCard.getSuit(), selectedCard.getRank());
 	}
 	
 	
