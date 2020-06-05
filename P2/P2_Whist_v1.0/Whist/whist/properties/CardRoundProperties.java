@@ -1,5 +1,7 @@
 package properties;
 
+import java.util.Random;
+
 import ch.aplu.jcardgame.Card;
 
 public class CardRoundProperties {
@@ -54,6 +56,10 @@ public class CardRoundProperties {
 	
 	public Card getWinningCard() {
 		return winningCard;
+	}
+	
+	public Random getRandom() {
+		return getRandom();
 	}
 	
 }
