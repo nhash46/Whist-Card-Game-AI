@@ -17,7 +17,6 @@ public abstract class CardGameProperties {
 	
 	protected CardRoundProperties roundInfo;
 	
-	protected static final Random random = new Random(30006);
 	public CardGameProperties(){
 
 	}
@@ -56,10 +55,6 @@ public abstract class CardGameProperties {
 	
 	public CardRoundProperties getRoundInfo() {
 		return roundInfo;
-	}
-	
-	public Random getRandom() {
-		return random;
 	}
 	
 }

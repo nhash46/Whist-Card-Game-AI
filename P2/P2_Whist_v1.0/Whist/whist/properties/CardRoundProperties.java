@@ -58,8 +58,4 @@ public class CardRoundProperties {
 		return winningCard;
 	}
 	
-	public Random getRandom() {
-		return getRandom();
-	}
-	
 }
