@@ -1,4 +1,5 @@
 package properties;
+
 import ch.aplu.jcardgame.Card;
 
 public class CardRoundProperties {
@@ -54,6 +55,5 @@ public class CardRoundProperties {
 	public Card getWinningCard() {
 		return winningCard;
 	}
-	
 	
 }

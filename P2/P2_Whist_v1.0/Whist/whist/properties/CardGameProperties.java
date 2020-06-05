@@ -1,5 +1,8 @@
 package properties;
 
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+
 import strategies.CardSelectionStrategyFactory;
 import strategies.ICardSelectionStrategy;
 
@@ -14,6 +17,12 @@ public abstract class CardGameProperties {
 	
 	protected CardRoundProperties roundInfo;
 	
+	protected static final Random random = new Random(30006);
+	public CardGameProperties(){
+
+	}
+	
+	
 	public enum Suit
 	{
 		SPADES, HEARTS, DIAMONDS, CLUBS
@@ -24,11 +33,6 @@ public abstract class CardGameProperties {
 		// Reverse order of rank importance (see rankGreater() below)
 		// Order of cards is tied to card images
 		ACE, KING, QUEEN, JACK, TEN, NINE, EIGHT, SEVEN, SIX, FIVE, FOUR, THREE, TWO
-	}
-	
-	
-	public CardGameProperties() {
-		
 	}
 	
 	
@@ -52,6 +56,10 @@ public abstract class CardGameProperties {
 	
 	public CardRoundProperties getRoundInfo() {
 		return roundInfo;
+	}
+	
+	public Random getRandom() {
+		return random;
 	}
 	
 }

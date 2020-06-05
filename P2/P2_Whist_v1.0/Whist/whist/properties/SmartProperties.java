@@ -20,5 +20,4 @@ public class SmartProperties extends CardGameProperties{
 		roundInfo = new CardRoundProperties(nbPlayers);
 	}
 	
-	
 }

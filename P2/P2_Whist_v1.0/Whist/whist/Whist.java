@@ -21,23 +21,24 @@ public class Whist extends CardGame {
   
   final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
 
-  static final Random random = ThreadLocalRandom.current();
+  //static final Random random = ThreadLocalRandom.current();
+  //static final Random random = new Random(30006);
   
   // return random Enum value
   public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
-      int x = random.nextInt(clazz.getEnumConstants().length);
+      int x = properties.getRandom().nextInt(clazz.getEnumConstants().length);
       return clazz.getEnumConstants()[x];
   }
   
   // return random Card from Hand
   public static Card randomCard(Hand hand){
-      int x = random.nextInt(hand.getNumberOfCards());
+      int x = properties.getRandom().nextInt(hand.getNumberOfCards());
       return hand.get(x);
   }
  
   // return random Card from ArrayList
   public static Card randomCard(ArrayList<Card> list){
-      int x = random.nextInt(list.size());
+      int x = properties.getRandom().nextInt(list.size());
       return list.get(x);
   }
   
@@ -64,7 +65,7 @@ public class Whist extends CardGame {
   private Actor[] scoreActors = {null, null, null, null };
   private final Location trickLocation = new Location(350, 350);
   private final Location textLocation = new Location(350, 450);
-  private final int thinkingTime = 20;
+  private final int thinkingTime = 2000;
   private Hand[] hands;
   private Location hideLocation = new Location(-500, - 500);
   private Location trumpsActorLocation = new Location(50, 50);
@@ -123,7 +124,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	int winner;
 	//Card winningCard;
 	Suit lead = null;
-	int nextPlayer = random.nextInt(properties.getNumPlayers()); // randomly select player to lead for this round
+	int nextPlayer = properties.getRandom().nextInt(properties.getNumPlayers()); // randomly select player to lead for this round
 	for (int i = 0; i < properties.getNumStartCards(); i++) {
 		trick = new Hand(deck);
     	selected = null;
@@ -227,7 +228,7 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   
   public static void main(String[] args)
   {
-	  properties = new SmartProperties();
+	  properties = new OriginalProperties();	  
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }
