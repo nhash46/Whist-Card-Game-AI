@@ -2,7 +2,7 @@ package properties;
 
 import java.util.Random;
 
-public class RandomProperty extends CardGameProperties {
+public class RandomProperty {
 	
 	protected static final Random random = new Random(30006);
 	
