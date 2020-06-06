@@ -1,4 +1,4 @@
-// Whist.java
+/*// Whist.java
 
 import properties.CardGameProperties;
 import properties.CardGameProperties.Suit;
@@ -8,26 +8,19 @@ import properties.OriginalProperties;
 import properties.RandomProperty;
 import properties.LegalProperties;
 import properties.SmartProperties;
-import strategies.CardGamePropertyFactory;
+
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.Properties;
 
 @SuppressWarnings("serial")
 public class Whist extends CardGame {
   
   final String trumpImage[] = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
 
-  //static final Random random = ThreadLocalRandom.current();
   //static final Random random = new Random(30006);
   
   // return random Enum value
@@ -233,35 +226,12 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   public static CardGameProperties properties;
   public static RandomProperty random;
   
-  public static void main(String[] args) throws IOException
-  {	
-	  // File file = new File("whist.properties");
-	  // System.out.println(file.getAbsolutePath());
-	  // properties = new OriginalProperties();
-	  
+  public static void main(String[] args)
+  {
+	  properties = new OriginalProperties();
 	  random = new RandomProperty();
-	  CardGamePropertyFactory propertyFactory = new CardGamePropertyFactory();
-	  
-	  Properties propertyFileInfo = new Properties();
-	  propertyFileInfo.setProperty("Property", "ORIGINAL");
-	  // Read properties
-	  FileReader inStream = null;
-	  try {
-		  inStream = new FileReader("whist.properties");
-		  propertyFileInfo.load(inStream);
-	  } finally {
-		  if (inStream != null) {
-            inStream.close();
-		  }
-	  }
-	  
-	  String propertyType = propertyFileInfo.getProperty("Property");
-	  System.out.println("Property Type: " + propertyType);
-	  properties = propertyFactory.getCardGamePropertyType(propertyType);
-	  System.out.println("properties: " + properties);
-	  
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
   }
 
-}
+}*/
