@@ -235,10 +235,6 @@ private Optional<Integer> playRound() {  // Returns winner, if any
   
   public static void main(String[] args) throws IOException
   {	
-	  // File file = new File("whist.properties");
-	  // System.out.println(file.getAbsolutePath());
-	  // properties = new OriginalProperties();
-	  
 	  random = new RandomProperty();
 	  CardGamePropertyFactory propertyFactory = new CardGamePropertyFactory();
 	  
@@ -258,7 +254,6 @@ private Optional<Integer> playRound() {  // Returns winner, if any
 	  String propertyType = propertyFileInfo.getProperty("Property");
 	  System.out.println("Property Type: " + propertyType);
 	  properties = propertyFactory.getCardGamePropertyType(propertyType);
-	  System.out.println("properties: " + properties);
 	  
 	  // System.out.println("Working Directory = " + System.getProperty("user.dir"));
 	  new Whist();
